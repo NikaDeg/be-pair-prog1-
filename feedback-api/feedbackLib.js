@@ -24,12 +24,7 @@ function getAll() {
     return FeedbackArray;
 }
 
-//Read one
-// function findbyId(id) {
-//     const numbericId = Number(id);
-//     const feedback = FeedbackArray.find(item => item.id === numbericId);
-//     return feedback || false;
-// }
+//Find by ID
 function findById(id) {
   const feedback = FeedbackArray.find((item) => item.id == id);
 
@@ -40,30 +35,34 @@ function findById(id) {
   return false;
 }
 
+function updateById(id, updatedFeedback) {
+    const feedback = findById(id);
+    if (feedback) {
+        if (updatedFeedback.sender) 
+            {feedback.sender = updatedFeedback.sender;}
+
+        if (updatedFeedback.message) 
+            {feedback.message = updatedFeedback.message;}
+
+        if (updatedFeedback.rating) 
+            {feedback.rating = updatedFeedback.rating;}
+
+        if (updatedFeedback.platform) 
+            {feedback.platform = updatedFeedback.platform;}
+
+        return feedback;
+    }
+
+    return false;
+}
 
 
-// if (require.main === module) {
-//     console.log("Running feedbackLib.js directly");
-//   const result = addOne(
-//     "John Smith",
-//     "Great session on React components!",
-//     5,
-//     "mobile"
-//   );
-
-  
-//     console.log(result);
-//     addOne("John Smith", "Great session!", 5, "mobile");
-// addOne("Anna Brown", "Very useful examples.", 4, "desktop");
-
-// console.log("getAll called:", getAll());
-
-// }
 
 module.exports = {
-  addOne,
-  getAll,
-  findById,
+    addOne,
+    getAll,
+    findById,
+    updateById,
 };
 
 

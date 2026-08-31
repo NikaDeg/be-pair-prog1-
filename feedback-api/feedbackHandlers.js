@@ -28,8 +28,15 @@ const getFeedbackById = (req, res) => {
 
 
 const updateFeedback = (req, res) => {
-    const { feedbackId } = req.params;
-    res.status(200).json({ message: `Update feedback with ID: ${feedbackId}` });
+    const feedbackId = req.params.feedbackId;
+    const {sender, message, rating, platform} = req.body;
+    const updatedFeedback = Feedback.updateById(feedbackId, {sender, message, rating, platform});
+    
+    if (updatedFeedback) {
+      res.json(updatedFeedback);
+    } else {
+      res.status(404).json({ message: "Feedback not found" });
+    }
 }
 
 const deleteFeedback = (req, res) => {
