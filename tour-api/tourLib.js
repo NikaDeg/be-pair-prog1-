@@ -1,54 +1,46 @@
-let TourArray = [];
-let nextId = 1;
+const Tour = require("./tourLib");
 
-function addOne(name, info, image, price, location) {
-    if (!name || !info || !image || !price || !location) {
-        return false;
-    }
+const getAllTours = (req, res) => {
+    const tours = Tour.getAll();
+    res.json(tours);
+};
 
-const newTour = {
-    id: nextId++,
+const createTour = (req, res) => {
+  const { name, info, image, price, location } = req.body;
+
+  const tour = Tour.addOne(
     name,
     info,
     image,
     price,
-    location,
-};
-
-TourArray.push(newTour);
-return newTour;
-};
-
-function getAll() {
-    return TourArray;
-}
-
-
-  const findById = (id) => {
-  return tours.find((tour) => tour.id === Number(id)) || null;
-};
-
-const update = (id, data) => {
-  const tour = tours.find(
-    (tour) => tour.id === Number(id)
+    location
   );
 
+  res.status(201).json(tour);
+};
+
+const getTourById = (req, res) => {
+  const tour = Tour.findById(req.params.tourId);
+
   if (!tour) {
-    return null;
+    return res.status(404).json({ message: "Tour not found" });
   }
 
-  Object.assign(tour, data);
-
-  return tour;
+  res.json(tour);
 };
 
+const updateTour = (req, res) => {
+  res.json({ message: "Hello from updateTour" });
+};
 
-
+const deleteTour = (req, res) => {
+  res.json({ message: "Hello from deleteTour" });
+};
 
 module.exports = {
-  addOne,
-  getAll,
-  findById,
+  getAllTours,
+  createTour,
+  getTourById,
+  updateTour,
+  deleteTour,
 };
-}
-    
