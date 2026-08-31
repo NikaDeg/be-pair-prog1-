@@ -19,9 +19,13 @@ TourArray.push(newTour);
 return newTour;
 };
 
+function getAll() {
+    return TourArray;
+}
+
 
 if (require.main === module) {
-  const result = addOne(
+   addOne(
     "7 Days Tour",
     "Join us for the Best of Helsinki!",
     "https://www.course-api.com/images/tours/tour-x.jpeg",
@@ -29,5 +33,13 @@ if (require.main === module) {
     "Helsinki, Finland"
   );
 
-  console.log(result);
+  addOne(
+  "Helsinki Weekend",
+  "Discover Helsinki.",
+  "https://example.com/helsinki.jpg",
+  "795",
+  "Helsinki, Finland"
+);
+
+  console.log(getAll());
 }
