@@ -20,7 +20,13 @@ const createTour = (req, res) => {
 };
 
 const getTourById = (req, res) => {
-  res.json({ message: "Hello from getTourById" });
+  const tour = Tour.findById(req.params.tourId);
+
+  if (!tour) {
+    return res.status(404).json({ message: "Tour not found" });
+  }
+
+  res.json(tour);
 };
 
 const updateTour = (req, res) => {
