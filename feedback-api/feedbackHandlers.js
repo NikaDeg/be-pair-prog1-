@@ -40,9 +40,15 @@ const updateFeedback = (req, res) => {
 }
 
 const deleteFeedback = (req, res) => {
-    const { feedbackId } = req.params;
-    res.status(200).json({ message: `Delete feedback with ID: ${feedbackId}` });
-}
+    const feedbackId = req.params.feedbackId;
+    const deleted = Feedback.deleteOneById(feedbackId);
+    if (!deleted) {
+        return res.status(404).json({ message: "Feedback not found" });
+    }
+
+    res.status(204).send();
+
+};
 
 module.exports = { getAllFeedbacks,
 createFeedback,

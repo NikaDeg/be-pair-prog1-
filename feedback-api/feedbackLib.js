@@ -35,6 +35,7 @@ function findById(id) {
   return false;
 }
 
+//Update by ID
 function updateById(id, updatedFeedback) {
     const feedback = findById(id);
     if (feedback) {
@@ -56,6 +57,16 @@ function updateById(id, updatedFeedback) {
     return false;
 }
 
+// Delete
+function deleteOneById(id) {
+    const feedback = findById(id);
+
+    if (!feedback) {
+        return false;
+    }
+    FeedbackArray = FeedbackArray.fillter((item) => item.id !== Number(id));
+    return true;
+}
 
 
 module.exports = {
@@ -63,6 +74,8 @@ module.exports = {
     getAll,
     findById,
     updateById,
+    deleteOneById,
+
 };
 
 
