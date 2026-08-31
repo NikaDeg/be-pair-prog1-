@@ -1,36 +1,36 @@
-const Tour = require("./tourLib");
+let TourArray = [];
+let nextId = 1;
 
-const getAllTours = (req, res) => {
-    const tours = Tour.getAll();
-    res.json(tours);
-};
+function addOne(name, info, image, price, location) {
+    if (!name || !info || !image || !price || !location) {
+        return false;
+    }
 
-const createTour = (req, res) => {
-  const { name, info, image, price, location } = req.body;
-
-  const tour = Tour.addOne(
+const newTour = {
+    id: nextId++,
     name,
     info,
     image,
     price,
-    location
-  );
-
-  res.status(201).json(tour);
+    location,
 };
 
-const getTourById = (req, res) => {
-  const tour = Tour.findById(req.params.tourId);
-
-  if (!tour) {
-    return res.status(404).json({ message: "Tour not found" });
-  }
-
-  res.json(tour);
+TourArray.push(newTour);
+return newTour;
 };
+
+function getAll() {
+    return TourArray;
+}
+
+
+const findById = (id) => {
+    return TourArray.find((tour) => tour.id === Number(id)) || null;
+};
+
 
 const update = (id, data) => {
-  const tour = tours.find(
+  const tour = TourArray.find(
     (tour) => tour.id === Number(id)
   );
 
@@ -44,7 +44,7 @@ const update = (id, data) => {
 };
 
 const deleteOne = (id) => {
-  const index = tours.findIndex(
+  const index = TourArray.findIndex(
     (tour) => tour.id === Number(id)
   );
 
@@ -52,14 +52,14 @@ const deleteOne = (id) => {
     return false;
   }
 
-  tours.splice(index, 1);
+  TourArray.splice(index, 1);
   return true;
 };
 
 module.exports = {
-  getAllTours,
-  createTour,
-  getTourById,
-  updateTour,
-  deleteTour,
+  addOne,
+  getAll,
+  findById,
+  update,
+  deleteOne,
 };
