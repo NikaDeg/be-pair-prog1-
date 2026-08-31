@@ -3,7 +3,7 @@ let nextId = 1;
 
 // Create
 function addOne(sender, message, rating, platform) {
-    if (!sender || !message || !rating || !platform) {
+    if (!sender || !message || rating < 1 || rating > 5 || !platform) {
         return false;
     }
 
@@ -64,7 +64,7 @@ function deleteOneById(id) {
     if (!feedback) {
         return false;
     }
-    FeedbackArray = FeedbackArray.fillter((item) => item.id !== Number(id));
+    FeedbackArray = FeedbackArray.filter((item) => item.id !== Number(id));
     return true;
 }
 
