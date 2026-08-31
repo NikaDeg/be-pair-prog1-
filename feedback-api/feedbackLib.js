@@ -28,7 +28,7 @@ function getAll() {
 function findbyId(id) {
     const numbericId = Number(id);
     const feedback = FeedbackArray.find(item => item.id === numbericId);
-    return feedback || False;
+    return feedback || false;
 }
 
 
