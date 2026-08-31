@@ -29,12 +29,31 @@ const getTourById = (req, res) => {
   res.json(tour);
 };
 
-const updateTour = (req, res) => {
-  res.json({ message: "Hello from updateTour" });
+const update = (id, data) => {
+  const tour = tours.find(
+    (tour) => tour.id === Number(id)
+  );
+
+  if (!tour) {
+    return null;
+  }
+
+  Object.assign(tour, data);
+
+  return tour;
 };
 
-const deleteTour = (req, res) => {
-  res.json({ message: "Hello from deleteTour" });
+const deleteOne = (id) => {
+  const index = tours.findIndex(
+    (tour) => tour.id === Number(id)
+  );
+
+  if (index === -1) {
+    return false;
+  }
+
+  tours.splice(index, 1);
+  return true;
 };
 
 module.exports = {
